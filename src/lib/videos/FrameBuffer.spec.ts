@@ -155,7 +155,6 @@ describe("FrameBuffer", () => {
 	});
 
 	it("detectMotion() returns 0 for no change, 100 for all different", () => {
-		// biome-ignore lint/style/useSingleVarDeclarator: shorter
 		const w = 8, h = 8, size = 3, x = 4, y = 4;
 		const buf = new FrameBuffer(w, h, size);
 
@@ -189,4 +188,3 @@ describe("FrameBuffer", () => {
 		expect(buf.detectMotion(0, 0, 10)).toBe(0);
 	});
 });
-

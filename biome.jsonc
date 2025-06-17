@@ -37,7 +37,8 @@
 				"useJsxKeyInIterable": "off"
 			},
 			"style": {
-				"noNonNullAssertion": "warn"
+				"noNonNullAssertion": "warn",
+				"useSingleVarDeclarator": "off"
 			},
 			"suspicious": {
 				/* Well.. if we use any that because there is no other reasonable options */

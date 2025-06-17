@@ -1,15 +1,7 @@
 import { beforeAll, expect, describe, it } from "bun:test";
-import {
-	BLACK,
-	BLUE,
-	RED,
-	type RgbVector,
-	type RgbaVector,
-	rgbCssColor,
-	rgbaCssColor
-} from "@utils/color-utils";
+import { BLACK, BLUE, RED, type RgbaVector } from "@utils/color-utils";
 import { Frame } from "./Frame";
-import { registerImageDataPolyfill } from "@/utils/imagedata-utils";
+import { registerImageDataPolyfill } from "@utils/imagedata-utils";
 
 /**
  * Helper to create ImageData with given width, height, and fill color.
@@ -35,7 +27,6 @@ beforeAll(() => {
 });
 
 describe("Frame", () => {
-	// biome-ignore lint/style/useSingleVarDeclarator: <explanation>
 	const w = 8,
 		h = 8;
 
