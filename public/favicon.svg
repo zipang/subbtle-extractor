@@ -1,0 +1,14 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<rect width="400" height="300" y="50" rx="48" fill="#22223B"/>
+	<text
+		x="50%"
+		y="66%"
+		text-anchor="middle"
+		baseline="top"
+		font-family="Ubuntu, Rotobo, Helvetica, sans-serif"
+		font-size="182"
+		font-weight="bold"
+		fill="#F2E9E4"
+		letter-spacing="4"
+	>SUB</text>
+</svg>
