@@ -1,0 +1,33 @@
+.aspect-ratio {
+	overflow: hidden;
+	position: relative;
+	height: 0;
+
+	> * {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.image-fill {
+	> img,
+	> video {
+		object-fit: fill;
+	}
+}
+
+.image-cover {
+	> img,
+	> video {
+		object-fit: cover;
+	}
+}
+
+.image-contain {
+	> img,
+	> video {
+		object-fit: contain;
+	}
+}
