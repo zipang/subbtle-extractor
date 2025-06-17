@@ -1,4 +1,4 @@
-import { formatTimestamp } from "@/utils/timestamps-utils";
+import { formatTimestamp } from "@utils/timestamps-utils";
 
 /**
  * Represents a single subtitle entry with start and end timestamps and text.
