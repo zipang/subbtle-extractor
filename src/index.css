@@ -720,6 +720,7 @@ section {
 .container,
 .container-fluid {
     width: 100%;
+    height: 100%;
     margin-right: auto;
     margin-left: auto;
     padding-right: var(--pico-spacing);
