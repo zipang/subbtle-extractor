@@ -7,7 +7,10 @@
 	"module": "src/server.ts",
 	"scripts": {
 		"dev": "bun --hot src/server.ts",
-		"build": "bun build ./src/index.html --outdir=dist --sourcemap --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
+		"build:prepare": "rm -Rf dist/",
+		"build:create": "bun build ./src/index.html --outdir=dist --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
+		"build:purge": "bun scripts/purge-css.ts",
+		"build": "bun run build:prepare && bun run build:create && bun run build:purge",
 		"start": "NODE_ENV=production bun src/server.ts",
 		"format": "biome format --write .",
 		"lint": "biome lint --write .",
@@ -24,6 +27,7 @@
 		"@types/bun": "latest",
 		"@types/react": "^19.1.8",
 		"@types/react-dom": "^19.1.6",
-		"biome": "^0.3.3"
+		"biome": "^0.3.3",
+		"purgecss": "^7.0.2"
 	}
 }
