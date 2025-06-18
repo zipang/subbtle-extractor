@@ -1,0 +1,29 @@
+{
+	"name": "subbtle-extractor",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"main": "src/server.ts",
+	"module": "src/server.ts",
+	"scripts": {
+		"dev": "bun --hot src/server.ts",
+		"build": "bun build ./src/index.html --outdir=dist --sourcemap --target=browser --minify --define:process.env.NODE_ENV='\"production\"' --env='BUN_PUBLIC_*'",
+		"start": "NODE_ENV=production bun src/server.ts",
+		"format": "biome format --write .",
+		"lint": "biome lint --write .",
+		"check": "biome check"
+	},
+	"dependencies": {
+		"clsx": "^2.1.1",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0",
+		"tesseract.js": "^6.0.1"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@types/bun": "latest",
+		"@types/react": "^19.1.8",
+		"@types/react-dom": "^19.1.6",
+		"biome": "^0.3.3"
+	}
+}
