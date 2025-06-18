@@ -1,86 +1,85 @@
 # DIRECTIONS TO CREATE THE PROJECT
 
-## Project Setup & Configuration [DONE]
+## Project Setup & Configuration
 
-ACTION: Initialize project with:
-- Bun as the bundler, dev server and test runner
-- Vite.js + React/TypeScript template
-- Biome for linting/formatting
-- Tesseract.js, sharp as dependencies
+- [x] Initialize project with:
+  - [x] Bun as the bundler, dev server and test runner
+  - [x] Vite.js + React/TypeScript template
+  - [x] Biome for linting/formatting
+  - [x] Tesseract.js, sharp as dependencies
 
-## Key Quality Requirements
+## Code Quality Requirements
 
-* Strict TypeScript: Full type coverage
-* Abundant usage of JSDoc to allow code maintenance
-* Error Boundaries: try catch and custom Errors
-* Responsive Design: Desktop only application (no mobile required)
+- [x] Strict TypeScript: Full type coverage
+- [x] Describe all public methods with JSDoc
+- [ ] Test edge cases early and throw meaningfull Exception. Don't ignore them.
+- [x] Error Boundaries: try catch() and custom Errors
+- [ ] Minimal Responsive Design: Desktop only application (no mobile required)
 
 ## Core Architecture Implementation
 
-ACTION: Create these foundational modules:
+- [ ] Internal core APIs and utils
 
-1. `src/lib/video/`
-   - Frame.ts (Implements Frame interface with color space conversions)
-   - FrameBuffer.ts (FIFO buffer with frame comparison methods)
+  - [x] `src/lib/video/`
+    - [x] Frame.ts (Implements Frame interface with color space conversions)
+    - [x] FrameBuffer.ts (FIFO buffer with frame comparison methods)
 
-2. `src/lib/image-processing/`
-   - filters.ts (Quantization, binarization, motion detection)
-   - index.ts 
+  - [ ] `src/lib/image-processing/`
+    - [ ] filters.ts (Quantization, binarization, motion detection)
+    - [ ] index.ts 
 
-2. `src/lib/ocr/`
-   - TesseractClient.ts (Wrapper for Tesseract.js with worker pool)
-   - OCRQueue.ts (Job queue with parallel processing)
+  - [ ] `src/lib/ocr/`
+    - [ ] TesseractClient.ts (Wrapper for Tesseract.js with worker pool)
+    - [ ] OCRQueue.ts (Job queue with parallel processing)
 
-3. `src/lib/subtitles/`
-   - SubtitleEntry.ts (class to hold the entry with the start and end timestamps)
-   - SubtitlesQueue.ts (Push)
-   - SubtitlesGenerator.ts (Process the queue + srt/vtt file generation)
+  - [x] `src/lib/subtitles/`
+    - [x] SubtitleEntry.ts (class to hold the entry with the start and end timestamps)
+    - [x] SubtitlesQueue.ts (`push()` new entries + `generate()` : process the queue to generate a `srt` or `vtt` subtitle file as text)
 
-4. `src/hooks/`
-   - useEventBus.ts (Global EventBus for easy component communication: `subscribe()`, `on()`, `off()`)
-   - useVideoProcessing.ts (Canvas frame processing pipeline: `addFrame()`)
-   - useSubtitleDetection.ts (Monitor the crop region: `onSubtitleStart()`, `onSubtitleEnd()`)
-   - useOCR.ts (`submitJob`, `startOCRProcess()`, `onJobDone()`)
+  - [ ] `src/hooks/`
+    - [ ] useEventBus.ts (Global EventBus for easy component communication: `subscribe()`, `on()`, `off()`)
+    - [ ] useVideoProcessing.ts (Canvas frame processing pipeline: `addFrame()`)
+    - [ ] useSubtitleDetection.ts (Monitor the crop region: `onSubtitleStart()`, `onSubtitleEnd()`)
+    - [ ] useOCR.ts (`submitJob`, `startOCRProcess()`, `onJobDone()`)
 
 ## 8. Critical Tests to Include before building the UI
 
-ACTION: Create the following unit test:
+- [ ] Create the following unit test:
 
-1. FrameBuffer unit tests
-   - FIFO behavior
-   - Background suppression (Motion detection)
-2. Palette reduction
-   - Reduce a palette with preservation of specific pinned colors
-3. Subtitles Queue Processing
-   - Add new entries
-   - Avoid timestamps overlapping
-   - Check and fix transcription errors (text correction)
-4. SRT generation
-   - Formatting correctness
-   - Timecode conversion
+  - [X] FrameBuffer unit tests
+    - [X] FIFO behavior
+    - [ ] Background suppression filter (using Motion detection)
+  - [ ] Palette reduction
+    - [ ] Reduce a palette with preservation of specific pinned colors
+  - [x] Subtitles Queue Processing
+    - [x] Add new entries
+    - [x] Avoid timestamps overlapping
+    - [ ] Check and fix transcription errors (text correction)
+  - [x] SRT generation
+    - [x] Formatting correctness
+    - [x] Timecode conversion
 
 ## UI Elements
 
-ACTION: Create the following components to build the final page:
+- [ ] Create the following components to build the final page:
 
-1. `src/components/VideoSourceSelector.tsx` (File/URL input)
-2. `src/components/LanguageSelector.tsx` (Select the language of the subtitles)
-3. `src/components/PinnedColors.tsx` (Select the pinned colors of the subtitles with a color picker + display them)
-4. `src/components/VideoCanvas.tsx` (Rendered canvas from a Video source element)
-5. `src/components/CropOverlay.tsx` (Interactive rectangular region over the Canvas)
-6. `src/components/ProcessingControls.tsx` (Play/pause/progress)
-7. `src/components/SnapshotsList.tsx` (Scrollable list of the captured snapshots)
-8. `src/components/OCRControls.tsx` (Launch/show progression of OCR jobs)
-9. `src/components/OCRResults.tsx` (Subtitles preview + export)
+  - [ ] `src/components/VideoSourceSelector.tsx` (File/URL input)
+  - [ ] `src/components/LanguageSelector.tsx` (Select the language of the subtitles)
+  - [ ] `src/components/PinnedColors.tsx` (Select the pinned colors of the subtitles with a color picker + display them)
+  - [ ] `src/components/VideoCanvas.tsx` (Rendered canvas from a Video source element)
+  - [ ] `src/components/CropOverlay.tsx` (Interactive rectangular region over the Canvas)
+  - [ ] `src/components/ProcessingControls.tsx` (Play/pause/progress)
+  - [ ] `src/components/SnapshotsList.tsx` (Scrollable list of the captured snapshots)
+  - [ ] `src/components/OCRControls.tsx` (Launch/show progression of OCR jobs)
+  - [ ] `src/components/OCRResults.tsx` (Subtitles preview + export)
 
-CREATE the final index.html and the main `App.tsx` component.
+- [ ] CREATE the final index.html and the main `App.tsx` component.
 
-10. `src/App.tsx` main components with sections and React providers for the EventBus and the useVideoProcessing() use hooks.
+  - [ ] `src/App.tsx` main components with sections and React providers for the EventBus and the useVideoProcessing() use hooks.
 
 ## 10. Deployment Configuration
 
-ACTION: Add:
-1. Vercel deployment config
-2. Cloudflare Pages preset
-3. Build script (vite.config.ts):
-
+- [ ] Add:
+  - [ ] Vercel deployment config
+  - [ ] Cloudflare Pages preset
+  - [ ] Build script (vite.config.ts)
