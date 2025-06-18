@@ -1,11 +1,12 @@
-import type { FC, PropsWithChildren } from "react";
+import type { FC, Child } from "hono/jsx/dom";
 
 /**
  * Basic styling via style attributes
  * All major box-related style properties are included for flexibility.
- * Some properties are now strictly typed for better type safety.
  */
 export interface BoxProps {
+	children: Child;
+
 	as?: "div" | "section" | "aside" | "main" | "header" | "footer" | "nav";
 	className?: string;
 
@@ -207,11 +208,7 @@ export interface BoxProps {
 	outline?: string;
 }
 
-export const Box: FC<PropsWithChildren<BoxProps>> = ({
-	children,
-	as = "div",
-	...rest
-}) => {
+export const Box: FC<BoxProps> = ({ children, as = "div", ...rest }) => {
 	const Component = as;
 
 	// Extract only style-related props for the style attribute

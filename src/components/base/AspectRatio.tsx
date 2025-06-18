@@ -1,9 +1,10 @@
-import type { FC, PropsWithChildren } from "react";
+import type { FC, Child } from "hono/jsx/dom";
 import { Box, type BoxProps } from "./Box";
 
 import "./aspect-ratio-styles.css";
 
 export interface AspectRatioProps extends BoxProps {
+	children: Child;
 	className?: string;
 	/**
 	 * The rapport of the width to the height
@@ -23,7 +24,7 @@ const asPercent = (ratio: number) => {
 /**
  * Box with fixed proportions (w=100%, h=w/ratio) and overflow hidden
  */
-export const AspectRatio: FC<PropsWithChildren<AspectRatioProps>> = ({
+export const AspectRatio: FC<AspectRatioProps> = ({
 	ratio,
 	className = "",
 	imageFit = "cover",

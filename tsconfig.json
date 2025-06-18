@@ -1,18 +1,45 @@
 {
+	"exclude": ["dist", "node_modules"],
 	"compilerOptions": {
+		// Environment setup & latest features
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		"target": "ESNext",
-		"module": "Preserve",
-		"moduleResolution": "bundler",
+		"module": "ESNext",
+		"moduleDetection": "force",
 		"jsx": "react-jsx",
+		"jsxImportSource": "hono/jsx/dom",
 		"allowJs": true,
+		"esModuleInterop": false,
+
+		// Bundler mode
+		"isolatedModules": true,
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"verbatimModuleSyntax": true,
+		"noEmit": true,
+		"outDir": "./dist",
+
+		// Best practices
 		"strict": true,
-		"skipLibCheck": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
 		"forceConsistentCasingInFileNames": true,
+
+		// Some stricter flags (disabled by default)
+		"allowSyntheticDefaultImports": false,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noPropertyAccessFromIndexSignature": false,
+
+		"types": ["bun"],
+		"skipLibCheck": true,
+
+		// Path aliases
 		"baseUrl": ".",
 		"paths": {
-			"@utils/*": ["./src/utils/*"],
-			"@components/*": ["./src/components/*"]
+			"@components/*": ["./src/components/*"],
+			"@lib/*": ["./src/lib/*"],
+			"@utils/*": ["./src/utils/*"]
 		}
-	},
-	"exclude": ["dist", "node_modules"]
+	}
 }

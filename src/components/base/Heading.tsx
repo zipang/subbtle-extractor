@@ -1,26 +1,35 @@
 // src/components/base/Heading.tsx
-import { styled, type HTMLStyledProps } from "@styled-system/jsx";
-import type { FC } from "hono/jsx";
+import type { FC, Child } from "hono/jsx/dom";
+import type { BoxProps } from "./Box";
+
+type heading_tag = "h1" | "h2" | "h3";
 
 const headingStyles = {
-	sm: { fontSize: "sm", lineHeight: "1rem" },
-	md: { fontSize: "md", lineHeight: "1.25rem" },
-	lg: { fontSize: "lg", lineHeight: "1.75rem" },
-	xl: { fontSize: "xl", lineHeight: "2rem" },
-	xxl: { fontSize: "xxl", lineHeight: "2.4rem" }
+	sm: { fontSize: "1rem", lineHeight: "1.1" },
+	md: { fontSize: "1.25rem", lineHeight: "1.2" },
+	lg: { fontSize: "1.5rem", lineHeight: "1.5" },
+	xl: { fontSize: "1.75rem", lineHeight: "1.5" },
+	xxl: { fontSize: "2rem", lineHeight: "1.2" },
+	"4xl": { fontSize: "4rem", lineHeight: "1.1" }
 };
 
-export interface HeadingProps extends HTMLStyledProps<"h1"> {
-	as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+const defaultSizes: Record<heading_tag, keyof typeof headingStyles> = {
+	h1: "xxl",
+	h2: "xl",
+	h3: "lg"
+};
+
+export interface HeadingProps extends Omit<BoxProps, "as"> {
+	children: Child;
+	as?: "h1" | "h2" | "h3";
 	size?: keyof typeof headingStyles;
 }
 
-const HeadingComponent = styled("h1") as FC<HeadingProps>;
+export const Heading: FC<HeadingProps> = ({ as = "h2", size, ...rest }) => {
+	const Component = as;
+	if (!size) {
+		size = defaultSizes[as];
+	}
 
-export const Heading: FC<HeadingProps> = ({ as = "h2", size = "xl", ...rest }) => (
-	<HeadingComponent
-		as={as}
-		{...headingStyles[size as keyof typeof headingStyles]}
-		{...rest}
-	/>
-);
+	return <Component {...headingStyles[size as keyof typeof headingStyles]} {...rest} />;
+};

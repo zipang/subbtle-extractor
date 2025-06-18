@@ -21,6 +21,11 @@ export interface GridProps extends BoxProps {
 	imageFit?: "cover" | "fill" | "contain";
 }
 
+/**
+ * A grid with same-sized grid items
+ * The children elements are the grid children
+ * If aspectRatio is passed, Every child is wrapped inside an AspectRatio component
+ */
 export const Grid: FC<GridProps> = ({
 	columns = 3,
 	gap = "2rem",
