@@ -1,24 +1,34 @@
-# UI Component Style Guide
+# A Guide to writing UI Component
 
-## 1. Component Structure
-- Use functional components with TypeScript (`FC<Props>`).
+## 1. Hono/jsx
+
+We use `hono/jsx` which is 90% similar to React in term of API.
+See the section **# Clients Components** inside the [what-is-hono](/what-is-hono.md) guide.
+
+## 2. Common imports
+- import `FC` and `Child` types from `"hono/jsx/dom"`.
+- import base components from `@components/base`.
+- import utility functions from `@utils`.
+- import local stylesheets using the component's class name.
+
+## 3. Component props
+- Type as functional components with TypeScript interface (`FC<Props>`).
+- Define a dedicated `MyComponentProps` interface for each component (using the component's name).
+- Document each prop with a JSDoc comment, including its default value if needed.
 - Export both the component and its props interface.
-- Place all layout components in a dedicated directory (e.g., `@components/base`).
-
-## 2. Imports
-- Import React types from `"react"`.
-- Import base components from `@components/base`.
-- Import utility functions from `@utils`.
-- Import local stylesheets using the component's class name.
-
-## 3. Props and Types
-- Define a dedicated `ComponentProps` interface for each component.
-- Document each prop with JSDoc comments, including default values.
 
 ## 4. Styling
-- Use local CSS files named after the component (e.g., `<component>-styles.css`).
-- Link styles to class names used in the component.
-- Additional dynamic styles can be added via style attributes like in Chakra UI. The list of this attributes is exported in the interface `BoxProps` : 
+
+- We are relying on a tweaked [Pico.css](https://picocss.com) stylesheet for the big picture (`src/index.css`). Global style choices should be achieved by tweaking the [Pico.css variables](https://picocss.com/docs/css-variables)
+- For component specific qtyles, use a local CSS file named after the component's name (e.g., `<component>-styles.css`).
+- Link this stylesheet inside the component. `import <component>-styles.css;`
+
+## 5. Base UI components
+
+- All layout components are placed inside a dedicated directory : `@components/base`.
+- All layout should be achieved by re-using these components : `<Box>, <Container>, <HStack>, <VStack>, <Grid>, <Spacer>, <Header>, <Footer>`.
+- Additional dynamic styles can be added on these base components via style attributes (like in Chakra UI). 
+  Here is the list of attributes exported by the interface `BoxProps` : 
 
 ```typescript
 /**
@@ -204,39 +214,48 @@ export interface BoxProps {
 }
 ```
 
-## 5. Reusability
-- All utility methods should be reusable and imported from a shared utils directory.
-- Avoid inline utility functions inside components.
-
 ## 6. Component Logic
-- Use helper functions for logic (e.g., `getColsClassName`).
-- Use utility functions for array or data manipulation (e.g., `makeArray`).
+- Extract helper functions for logic (e.g., `getColsClassName`).
+- Reuseable helper functions like array or color manipulation should be placed inside the shared `src/utils/` directory.
 
 ## 8. Accessibility
 - Ensure all components are accessible by default. 
-- Use key shortcuts to activate functions. Ex: Space to play/pause, Enter to send the edited value.
-- Use semantic HTML elements via base components.
+- Use key shortcuts to activate component's actions. Ex: "Space" to play/pause, "Enter" to validate the current entry..
+- Use _semantic_ HTML elements via the base components `as` attribute (e.g. `<Box as="aside">`) .
 
 ## 9. Documentation
-- Document the component and its props using JSDoc.
+- Document the component and its props using a JSDoc header.
 - Include a description of the component's purpose and usage.
 
 # Example
 
-This is an example of a component using this style guide
+This is an example of a typical component using this style guide
 
 ```tsx
-import type { FC } from "react";
+import type { FC, Child } from "hono/jsx";
 import { AspectRatio, Box, type BoxProps } from "@components/base";
 import { makeArray } from "@utils/array-utils";
 
 // Local styles linked to our `.grid` class name
 import "./grid-styles.css";
 
+/**
+ * Add a specific classname to indicate the number of columns
+ */
+const getColsClassName = (cols: number) => {
+    return ["", "one-column", "two-columns", "three-columns", "four-columns"][cols]
+}
+
+/**
+ * HOC Utility to wrap an element inside an AspectRatio
+ */
+const aspectRatioWrapper = (aspectRatio: number | undefined, imageFit) => ({ children: Child }) => { ... }
 
 export interface GridProps extends BoxProps {
+    children?: Child;
     /**
      * Number of displayed columns (used on desktop size)
+     * @default 3
      */
 	columns: 1 | 2 | 3 | 4;
 	/**
@@ -244,28 +263,26 @@ export interface GridProps extends BoxProps {
 	 */
 	aspectRatio?: number;
 	/**
-	 * Tell how an image or video should fit into a grid item
+	 * Tell how an image or video should fit inside a grid item
+     * @default "cover"
 	 */
 	imageFit?: "cover" | "fill" | "contain";
 }
 
 /**
  * A grid with same-sized grid items
- * The children elements are the grid children
- * If aspectRatio is passed, Every child is wrapped inside an AspectRatio component
+ * If `aspectRatio` is passed, Every child is wrapped inside an AspectRatio component
  */
 export const Grid: FC<GridProps> = ({
 	columns = 3,
 	gap = "2rem",
 	imageFit = "cover",
-	aspectRatio = 4 / 3,
+	aspectRatio,
 	children = [],
 	...rest
 }) => (
-	<Box className={`container grid ${getColsClassName(columns)}`} gap={gap} {...rest}>
-		{makeArray(children).map((child) => (
-			/// ...
-		))}
+	<Box className={`grid ${getColsClassName(columns)}`} gap={gap} {...rest}>
+		{makeArray(children).map(aspectRatioWrapper(aspectRatio, imageFit))}
 	</Box>
 );
 ```
