@@ -1,13 +1,16 @@
-import "./index.css";
+import { Container } from "@components/base/Container";
 
+/**
+ * Langing page
+ */
 export function App() {
 	return (
-		<div className="app">
+		<Container>
 			<h1>Bun + React</h1>
 			<p>
 				Edit <code>src/App.tsx</code> and save to test HMR
 			</p>
-		</div>
+		</Container>
 	);
 }
 
