@@ -34,7 +34,7 @@ export const Grid: FC<GridProps> = ({
 	children = [],
 	...rest
 }) => (
-	<Box className={`container grid ${cols[columns]}`} gap={gap} {...rest}>
+	<Box className={`grid ${cols[columns]}`} gap={gap} {...rest}>
 		{makeArray(children).map((item) => (
 			<AspectRatio className="grid-item" imageFit={imageFit} ratio={aspectRatio}>
 				{item}

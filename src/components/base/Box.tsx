@@ -206,12 +206,26 @@ export interface BoxProps {
 	transition?: string;
 	visibility?: "visible" | "hidden" | "collapse" | "inherit" | "initial" | "unset";
 	outline?: string;
+
+	//
+	style: Record<string, BoxProps>;
 }
 
-export const Box: FC<BoxProps> = ({ children, as = "div", ...rest }) => {
+export const Box: FC<BoxProps> = ({
+	children,
+	as = "div",
+	className,
+	style,
+	...rest
+}) => {
 	const Component = as;
+
+	const props = {} as BoxProps;
+	if (className) props.className = className;
+	// @ts-ignore
+	if (rest) props.style = { ...style, ...rest };
 
 	// Extract only style-related props for the style attribute
 	// (You may want to filter out non-style props if you add more in the future)
-	return <Component style={{ ...rest }}>{children}</Component>;
+	return <Component {...props}>{children}</Component>;
 };

@@ -1,28 +1,32 @@
 .grid {
-	display: grid;
+    display: grid;
+    height: 100%;
 
-	/* Column mode is only enabled when the screen is large enough */
-	@media (min-width: 640px) {
-		&.two-columns {
-			grid-template-columns: repeat(2, 1fr);
-		}
-		&.three-columns {
-			grid-template-columns: repeat(3, 1fr);
-		}
-		&.four-columns {
-			grid-template-columns: repeat(4, 1fr);
-		}
-	}
+    /* Column mode is only enabled when the screen is large enough */
+    @media (min-width: 640px) {
+        &.two-columns {
+            grid-template-columns: repeat(2, 1fr);
+        }
 
-	.grid-item {
-		position: relative;
-		overflow: hidden;
+        &.three-columns {
+            grid-template-columns: repeat(3, 1fr);
+        }
 
-		&.image-fit > img {
-			object-fit: contain;
-		}
-		&.image-cover > img {
-			object-fit: cover;
-		}
-	}
+        &.four-columns {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    .grid-item {
+        position: relative;
+        overflow: hidden;
+
+        &.image-fit>img {
+            object-fit: contain;
+        }
+
+        &.image-cover>img {
+            object-fit: cover;
+        }
+    }
 }
