@@ -213,14 +213,29 @@ export interface BoxProps extends StyledAttrProps {
 interface FinalProps {
 	children: Child;
 	className?: string;
+	role?: string;
+	"aria-label"?: string;
+	tabIndex?: number;
 	style?: Partial<Record<keyof StyledAttrProps, any>>;
 }
 
-export const Box: FC<BoxProps> = ({ children, as = "div", className, ...rest }) => {
+const extractStandardProps = (bag: Record<string, any>) => {
+	const standard = {} as FinalProps;
+	["className", "tabIndex", "role", "aria-label"].forEach((propName) => {
+		if (propName in bag) {
+			// @ts-ignore
+			standard[propName] = bag[propName];
+			delete bag[propName];
+		}
+	})
+	return standard;
+}
+
+export const Box: FC<BoxProps> = ({ children, as = "div", ...rest }) => {
 	const Component = as;
 
-	const props = {} as FinalProps;
-	if (className) props.className = className;
+	const props = extractStandardProps(rest) as FinalProps;
+
 	// We add style to resume all Box props
 	if (Object.keys(rest).length > 0) props.style = { ...rest };
 
