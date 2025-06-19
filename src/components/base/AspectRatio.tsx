@@ -42,7 +42,7 @@ export const AspectRatio: FC<AspectRatioProps> = ({
 	return (
 		<Box
 			className={`aspect-ratio image-${imageFit} ${className}`}
-			style={{ "padding-top": asPercent(ratio) }}
+			paddingTop={asPercent(ratio)}
 		>
 			{children}
 		</Box>

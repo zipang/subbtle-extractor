@@ -1,8 +1,8 @@
 // src/components/base/Text.tsx
 import type { FC, Child } from "hono/jsx/dom";
-import type { BoxProps } from "./Box";
+import type { StyledAttrProps } from "./Box";
 
-export interface TextProps extends Omit<BoxProps, "as"> {
+export interface TextProps extends StyledAttrProps {
 	children: Child;
 	as?: "p" | "em" | "strong" | "span" | "label";
 }

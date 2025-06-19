@@ -4,12 +4,7 @@ import type { FC, Child } from "hono/jsx/dom";
  * Basic styling via style attributes
  * All major box-related style properties are included for flexibility.
  */
-export interface BoxProps {
-	children: Child;
-
-	as?: "div" | "section" | "aside" | "main" | "header" | "footer" | "nav";
-	className?: string;
-
+export interface StyledAttrProps {
 	// Layout
 	display?:
 		| "block"
@@ -206,24 +201,28 @@ export interface BoxProps {
 	transition?: string;
 	visibility?: "visible" | "hidden" | "collapse" | "inherit" | "initial" | "unset";
 	outline?: string;
-
-	//
-	style: Record<string, BoxProps>;
 }
 
-export const Box: FC<BoxProps> = ({
-	children,
-	as = "div",
-	className,
-	style,
-	...rest
-}) => {
+export interface BoxProps extends StyledAttrProps {
+	children: Child;
+
+	as?: "div" | "section" | "aside" | "main" | "header" | "footer" | "nav";
+	className?: string;
+}
+
+interface FinalProps {
+	children: Child;
+	className?: string;
+	style?: Partial<Record<keyof StyledAttrProps, any>>;
+}
+
+export const Box: FC<BoxProps> = ({ children, as = "div", className, ...rest }) => {
 	const Component = as;
 
-	const props = {} as BoxProps;
+	const props = {} as FinalProps;
 	if (className) props.className = className;
-	// @ts-ignore
-	if (rest) props.style = { ...style, ...rest };
+	// We add style to resume all Box props
+	if (Object.keys(rest).length > 0) props.style = { ...rest };
 
 	// Extract only style-related props for the style attribute
 	// (You may want to filter out non-style props if you add more in the future)

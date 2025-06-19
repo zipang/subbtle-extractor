@@ -1,6 +1,6 @@
 // src/components/base/Heading.tsx
 import type { FC, Child } from "hono/jsx/dom";
-import type { BoxProps } from "./Box";
+import type { StyledAttrProps } from "./Box";
 
 type heading_tag = "h1" | "h2" | "h3";
 
@@ -19,7 +19,7 @@ const defaultSizes: Record<heading_tag, keyof typeof headingStyles> = {
 	h3: "lg"
 };
 
-export interface HeadingProps extends Omit<BoxProps, "as"> {
+export interface HeadingProps extends StyledAttrProps {
 	children: Child;
 	as?: "h1" | "h2" | "h3";
 	size?: keyof typeof headingStyles;
