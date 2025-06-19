@@ -26,10 +26,10 @@ export const VideoSelector: FC<VideoSelectorProps> = ({
 	label = "Drag or click to upload a video"
 }) => (
 	<VStack
+		as="article"
 		justifyContent="space-evenly"
-		className="video-selector"
-		tabindex={0}
-		role="button"
+		className="video-selector card"
+		tabIndex={0}
 		aria-label={label}
 	>
 		<Box className="video-selector-icon" aria-hidden="true">

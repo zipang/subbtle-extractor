@@ -1,20 +1,10 @@
 .video-selector {
     aspect-ratio: 4 / 3;
-    border: 2px dashed var(--pico-muted-border-color, #bbb);
-    border-radius: 1rem;
-    background: var(--pico-muted-background-color, #fafafa);
+    border: 2px dashed var(--pico-border-color, #bbb);
     cursor: pointer;
-    width: 100%;
-    height: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    transition: border-color 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.video-selector:focus {
+.video-selector:focus, .video-selector:hover {
     outline: none;
     border-color: var(--pico-primary, #007bff);
 }
@@ -30,13 +20,11 @@
     align-items: center;
     justify-content: center;
     background: var(--pico-muted-border-color, #e0e0e0);
-    border-radius: 0.5rem;
+    border-radius: 50%;
     font-size: 2.5rem;
     color: var(--pico-muted-color, #888);
 }
 
 .video-selector-label {
-    color: var(--pico-muted-color, #666);
-    font-size: 1rem;
     text-align: center;
 }
