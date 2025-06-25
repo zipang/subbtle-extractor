@@ -5,6 +5,7 @@ import type { StyledAttrProps } from "./Box";
 export interface TextProps extends StyledAttrProps {
 	children: Child;
 	as?: "p" | "em" | "strong" | "span" | "label";
+	className?: string;
 }
 
 export const Text: FC<TextProps> = ({ children, as = "p", ...rest }) => {
