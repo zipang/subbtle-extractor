@@ -176,7 +176,7 @@ input:not([type=submit],
 }
 
 [type=search] {
-    --pico-border-radius: 5rem;
+    --pico-border-radius: 10rem;
 }
 
 [type=checkbox],
@@ -197,7 +197,7 @@ nav details.dropdown summary:focus-visible {
 }
 
 [role=search] {
-    --pico-border-radius: 5rem;
+    --pico-border-radius: 10rem;
 }
 
 [role=search]:has(button.secondary:focus,
@@ -249,8 +249,8 @@ details summary[role=button]:not(.outline)::after {
 :host(:not([data-theme=dark])) {
     color-scheme: light;
     --pico-background-color: #fff;
-    --pico-color: #373c44;
-    --pico-text-selection-color: rgba(183, 136, 0, 0.25);
+    --pico-color: #000000;
+    --pico-text-selection-color: rgb(0, 166, 255);
     --pico-muted-color: #646b79;
     --pico-muted-border-color: rgb(231, 234, 239.5);
     --pico-primary: #876400;
@@ -378,8 +378,8 @@ details summary[role=button]:not(.outline)::after {
     :host(:not([data-theme])) {
         color-scheme: dark;
         --pico-background-color: rgb(19, 22.5, 30.5);
-        --pico-color: #c2c7d0;
-        --pico-text-selection-color: rgba(199, 148, 0, 0.1875);
+        --pico-color: #ffffff;
+        --pico-text-selection-color: rgba(0, 176, 199, 0.188);
         --pico-muted-color: #7b8495;
         --pico-muted-border-color: #202632;
         --pico-primary: #c79400;
