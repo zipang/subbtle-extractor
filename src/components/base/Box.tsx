@@ -219,17 +219,19 @@ interface FinalProps {
 	style?: Partial<Record<keyof StyledAttrProps, any>>;
 }
 
-const extractStandardProps = (bag: Record<string, any>) => {
+const STANDARD_PROPS = ["className", "tabIndex", "role", "aria-label"];
+
+const extractStandardProps = (propertyBag: Record<string, any>) => {
 	const standard = {} as FinalProps;
-	["className", "tabIndex", "role", "aria-label"].forEach((propName) => {
-		if (propName in bag) {
+	Object.keys(propertyBag).forEach((propName) => {
+		if (STANDARD_PROPS.indexOf(propName) >= 0 || propName.startsWith("on")) {
 			// @ts-ignore
-			standard[propName] = bag[propName];
-			delete bag[propName];
+			standard[propName] = propertyBag[propName];
+			delete propertyBag[propName];
 		}
-	})
+	});
 	return standard;
-}
+};
 
 export const Box: FC<BoxProps> = ({ children, as = "div", ...rest }) => {
 	const Component = as;
