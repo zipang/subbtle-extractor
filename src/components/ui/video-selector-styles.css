@@ -40,3 +40,8 @@
     font-size: 1rem;
     text-align: center;
 }
+
+.video-selector.drag-over {
+    border-color: var(--pico-primary, #007bff);
+    background-color: var(--pico-primary-background, #e6f2ff);
+}
