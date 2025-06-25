@@ -71,8 +71,8 @@ graph TD
 The technique is exposed in various articles like : 
 * [Manipulating videos using canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Manipulating_video_using_canvas)
 
-The idea is to load the selected video into a <video> element and to register an event listener on the `play` event on that element.
-When the `play` event occurs, it is possible to copy each video frames to a first <canvas> element.
+The idea is to load the selected video into a `<video>` element and to register an event listener on the `play` event on that element.
+When the `play` event occurs, it is possible to copy each video frames to a first `<canvas>` element.
 That initial canvas element has an **API** to access the data of each frame and this will allow us to buffer and process each images
 before displaying the final result into a second canvas element.
 
@@ -274,21 +274,60 @@ type ImageFilter: ()
 quantize(opts: quantizeOptions): Filter;
 ```
 
-## Project configuration, toolkit
+### The Subtitles
+
+```typescript
+interface SubtitleEntry {
+    /**
+     * Start time in milliseconds
+     */
+    start: number;
+    /**
+     * End time in milliseconds
+     */
+    end: number;
+    /**
+     * Subtitle text
+     */
+    text: string;
+    constructor(start: number, end: number, text: string);
+    /**
+     * Shift subtitle by amount (ms), throws if negative
+     */
+    moveBy(amount: number): void;
+    /**
+     * Set end = start + duration, throws if negative
+     */
+    updateDuration(duration: number): void;
+    /**
+     * SRT formatted subtitle entry
+     */
+    toSRT(index: number): string;
+    /**
+     * VTT formatted subtitle entry
+     */
+    toVTT(): string;
+}
+```
+
+## Technnical stack
 
 A modern front-end only SPA written in Typescript
 
 * Runtime: [bun](https://bun.sh/) (replace altogether nodeJS, Vitest and the package manager)
-* Bundler and dev server: [Vite.js](https://vite.dev/)
-* Linting/Formatting: [Biome](https://biomejs.dev/)
-* Git actions for automatic CI/CD on Git push
+* Bundler and dev server: [bun](https://bun.sh/) (until we nedd [Vite.js](https://vite.dev/))
+* Linting/Formatting: [BiomeJS](https://biomejs.dev/)
+* Git actions for automatic CI/CD on `git push`
 * Most modern browsers only (ESNext) : ESM, Canvas, Web workers, ...
 
 ### Libraries: 
 
 * In browser OCR: [Tesseract.js]() (WASM)
-* Image manipulation (crop, some filters): [sharp](https://sharp.pixelplumbing.com/)
+* In-browser image manipulation (color manipuilation, distance, some filters): [Chroma](https://gka.github.io/chroma.js)
 
 ### Deployment
-Hosting: ready to deploy button for Vercel, Cloudflare Pages..
 
+Hosting: ready to deploy button for 
+* Vercel
+* Cloudflare Pages
+* AppWrite
